@@ -13,7 +13,7 @@ module.exports = function pjax() {
     var pjax = false;
 
     if (this.request.get('X-PJAX') === 'true') {
-      pjax = {container: getContainer(request)};
+      pjax = {container: getContainer(this.request)};
     }
     if (pjax) {
       this.request.pjax = pjax;

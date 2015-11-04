@@ -1,6 +1,6 @@
 {
   "name": "koa-request-pjax",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple middleware to grab & set PJAX related headers",
   "main": "index.js",
   "scripts": {
