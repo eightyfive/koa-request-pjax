@@ -8,7 +8,26 @@ $ npm install koa-request-pjax --save
 ```
 
 ## Example
+
+When this is a PJAX request, an `object` is set on the koa request:
+
+```js
+this.request.pjax = {
+  container: '#content'
+}
 ```
+
+You can alter this `object` to set PJAX response headers automatically:
+
+```js
+// This will set the 'X-PJAX-URL' response header
+this.request.pjax.url = "http://localhost:3000/foo/bar";
+
+// This will set the 'X-PJAX-Version' response header
+this.request.pjax.version = "v123";
+```
+
+```js
 var koa = require('koa');
 var pjax = require('koa-request-pjax');
 var app = koa();
@@ -17,8 +36,6 @@ app.use(pjax());
 app.use(function *(){
   this.body = 'Hello World';
   
-  // When this is a PJAX request, an `object` is set on the request:
-  // ex: { container: '#content' }
   if (this.request.pjax) {
 
     /**
@@ -26,11 +43,9 @@ app.use(function *(){
       * ...
       */
     
-    // This will set the 'X-PJAX-URL' response header
-    this.request.pjax.url = "http://localhost:3000/foo/bar";
-
-    // This will set the 'X-PJAX-Version' response header
-    this.request.pjax.version = "http://localhost:3000/foo/bar";
+    this.request.pjax.version = "v123";
+    
+    // Etc...
   }
 });
 
