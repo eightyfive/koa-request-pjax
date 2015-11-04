@@ -7,7 +7,7 @@ A simple middleware to grab & set PJAX related headers
 $ npm install koa-request-pjax --save
 ```
 
-## Example
+## Usage
 
 When this is a PJAX request, an `object` is set on the koa request:
 
@@ -26,6 +26,8 @@ this.request.pjax.url = "http://localhost:3000/foo/bar";
 // This will set the 'X-PJAX-Version' response header
 this.request.pjax.version = "v123";
 ```
+
+## Example
 
 ```js
 var koa = require('koa');
