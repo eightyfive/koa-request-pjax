@@ -16,7 +16,7 @@ module.exports = function pjax() {
       pjax = {container: getContainer(this.request)};
     }
     if (pjax) {
-      this.request.pjax = pjax;
+      this.state.pjax = pjax;
     }
 
     yield next;
