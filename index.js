@@ -1,7 +1,7 @@
-
+'use strict';
 
 function getContainer(request) {
-  var cont = request.get('X-PJAX-Container');
+  let cont = request.get('X-PJAX-Container');
   if (!cont) {
     cont = request.query._pjax;
   }
@@ -10,19 +10,15 @@ function getContainer(request) {
 
 module.exports = function pjax() {
   return function *pjax(next) {
-    var pjax = false;
-
     if (this.request.get('X-PJAX') === 'true') {
-      pjax = {container: getContainer(this.request)};
-    }
-    if (pjax) {
-      this.state.pjax = pjax;
+      this.state.pjax = {container: getContainer(this.request)};
     }
 
     yield next;
 
+    const pjax = this.state.pjax || (this.flash ? this.flash.pjax : null);
     if (pjax) {
-      if (pjax.url) {
+      if(pjax.url) {
         this.response.set('X-PJAX-URL', pjax.url);
       }
       if (pjax.version) {
